@@ -1,5 +1,44 @@
 # Troubleshooting Module Federation Setup
 
+## Error: React Context/useContext during SSR Build
+
+**Error Message**: `useContext` errors during build, "Export encountered errors on following paths"
+
+This error occurs when Next.js tries to statically generate pages that use React hooks or client-side only code.
+
+### Solution: Disable Static Generation
+
+Use `getServerSideProps` instead of static generation, and ensure components are dynamically imported with `ssr: false`:
+
+**In pages/index.tsx (and other pages):**
+
+```typescript
+import dynamic from 'next/dynamic';
+
+// Dynamically import to disable SSR
+const AdminDashboard = dynamic(() => import('../components/AdminDashboard'), {
+  ssr: false,
+});
+
+export default function Home() {
+  return <AdminDashboard />;
+}
+
+// Use server-side rendering instead of static generation
+export const getServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};
+```
+
+**Key Points:**
+- ✅ Use `dynamic()` import with `ssr: false` for client-side components
+- ✅ Add `getServerSideProps` to prevent static generation
+- ✅ This ensures components only render on the client side
+
+---
+
 ## Error: App Directory is not supported by nextjs-mf
 
 **Error Message**: `App Directory is not supported by nextjs-mf. Use only pages directory`

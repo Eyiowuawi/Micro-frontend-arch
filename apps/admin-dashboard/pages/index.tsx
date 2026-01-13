@@ -1,4 +1,9 @@
-import AdminDashboard from '../components/AdminDashboard';
+import dynamic from 'next/dynamic';
+
+// Dynamically import to disable SSR for client-side only component
+const AdminDashboard = dynamic(() => import('../components/AdminDashboard'), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
@@ -11,3 +16,10 @@ export default function Home() {
     </div>
   );
 }
+
+// Use server-side rendering instead of static generation
+export const getServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};

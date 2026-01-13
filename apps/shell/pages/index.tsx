@@ -46,3 +46,10 @@ export default function Home() {
     </main>
   );
 }
+
+// Use server-side rendering to avoid static generation issues
+export const getServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};

@@ -16,3 +16,10 @@ export default function AdminPage() {
     </div>
   );
 }
+
+// Use server-side rendering to avoid static generation issues
+export const getServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};
