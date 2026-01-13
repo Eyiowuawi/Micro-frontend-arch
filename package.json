@@ -1,0 +1,25 @@
+{
+  "name": "module-federation-test",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "yarn workspaces run dev",
+    "dev:shell": "yarn workspace shell dev",
+    "dev:admin": "yarn workspace admin-dashboard dev",
+    "dev:customer": "yarn workspace customer-dashboard dev",
+    "build": "yarn workspaces run build",
+    "build:shell": "yarn workspace shell build",
+    "build:admin": "yarn workspace admin-dashboard build",
+    "build:customer": "yarn workspace customer-dashboard build"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "typescript": "^5.3.3"
+  }
+}

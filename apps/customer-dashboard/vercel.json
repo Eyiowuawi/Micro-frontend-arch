@@ -1,0 +1,6 @@
+{
+  "buildCommand": "NEXT_PRIVATE_LOCAL_WEBPACK=true yarn build",
+  "devCommand": "NEXT_PRIVATE_LOCAL_WEBPACK=true yarn dev",
+  "installCommand": "yarn install",
+  "outputDirectory": ".next"
+}
