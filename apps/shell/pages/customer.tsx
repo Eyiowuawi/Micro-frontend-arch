@@ -24,7 +24,7 @@ export default function CustomerPage() {
           alignItems: "center",
         }}
       >
-        <Link href="/" passHref>
+        <Link href="/">
           <a
             style={{
               padding: "8px 16px",
@@ -32,20 +32,13 @@ export default function CustomerPage() {
               color: "#666",
               textDecoration: "none",
               borderRadius: "4px",
-              transition: "all 0.2s",
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.background = "#e0e0e0";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.background = "transparent";
             }}
           >
             ← Home
           </a>
         </Link>
         <span style={{ color: "#ccc" }}>|</span>
-        <Link href="/admin" passHref>
+        <Link href="/admin">
           <a
             style={{
               padding: "8px 16px",
@@ -53,13 +46,6 @@ export default function CustomerPage() {
               color: "#0070f3",
               textDecoration: "none",
               borderRadius: "4px",
-              transition: "all 0.2s",
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.background = "#e6f2ff";
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.background = "transparent";
             }}
           >
             Admin Dashboard →
