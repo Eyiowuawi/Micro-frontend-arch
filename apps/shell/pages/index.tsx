@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 export default function Home() {
-  const router = useRouter();
 
   return (
     <main style={{ padding: "40px", maxWidth: "1200px", margin: "0 auto" }}>
@@ -26,7 +24,7 @@ export default function Home() {
           Navigate to Dashboards:
         </h2>
         <div style={{ display: "flex", gap: "15px", flexWrap: "wrap" }}>
-          <Link href="/admin" passHref>
+          <Link href="/admin">
             <a
               style={{
                 padding: "14px 28px",
@@ -38,27 +36,15 @@ export default function Home() {
                 borderRadius: "8px",
                 cursor: "pointer",
                 textDecoration: "none",
-                transition: "all 0.2s",
                 display: "inline-block",
                 boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = "#0051cc";
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 12px rgba(0, 112, 243, 0.4)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = "#0070f3";
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
               }}
             >
               Admin Dashboard →
             </a>
           </Link>
 
-          <Link href="/customer" passHref>
+          <Link href="/customer">
             <a
               style={{
                 padding: "14px 28px",
@@ -70,20 +56,8 @@ export default function Home() {
                 borderRadius: "8px",
                 cursor: "pointer",
                 textDecoration: "none",
-                transition: "all 0.2s",
                 display: "inline-block",
                 boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.background = "#5e1fa8";
-                e.currentTarget.style.transform = "translateY(-2px)";
-                e.currentTarget.style.boxShadow =
-                  "0 4px 12px rgba(121, 40, 202, 0.4)";
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.background = "#7928ca";
-                e.currentTarget.style.transform = "translateY(0)";
-                e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,0,0,0.1)";
               }}
             >
               Customer Dashboard →
