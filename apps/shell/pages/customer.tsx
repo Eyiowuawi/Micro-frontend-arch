@@ -1,7 +1,9 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Suspense } from "react";
+import type { GetServerSidePropsContext } from "next";
 
+// Dynamic import - Module Federation will resolve this at runtime
 const CustomerDashboard = dynamic(() => import("customer/CustomerDashboard"), {
   ssr: false,
   loading: () => (
@@ -64,7 +66,9 @@ export default function CustomerPage() {
 }
 
 // Use server-side rendering to avoid static generation issues
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   // Allow the page to render on server without Module Federation
   // Remote components load client-side only (ssr: false)
   return {
