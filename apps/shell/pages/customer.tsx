@@ -64,7 +64,9 @@ export default function CustomerPage() {
 }
 
 // Use server-side rendering to avoid static generation issues
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
+  // Allow the page to render on server without Module Federation
+  // Remote components load client-side only (ssr: false)
   return {
     props: {},
   };

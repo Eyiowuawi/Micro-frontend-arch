@@ -89,7 +89,8 @@ export default function Home() {
 }
 
 // Use server-side rendering to avoid static generation issues
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
+  // Allow the page to render on server without Module Federation
   return {
     props: {},
   };

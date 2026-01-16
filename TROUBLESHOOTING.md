@@ -86,6 +86,62 @@ Update your `package.json` scripts to include the environment variable:
 
 ---
 
+## Error: Serverless Function Crash (500 Internal Server Error)
+
+**Error Message**: `FUNCTION_INVOCATION_FAILED` or `500: INTERNAL_SERVER_ERROR` on Vercel
+
+This error occurs when Module Federation tries to access remotes during server-side rendering (SSR) or build time, but the remotes aren't available or accessible.
+
+### Solution: Client-Side Only Module Federation
+
+The Module Federation plugin should only be applied on the client-side build to avoid SSR issues:
+
+**In `next.config.js`:**
+
+```javascript
+webpack: (config, options) => {
+  const { isServer } = options;
+
+  // Only apply Module Federation on client-side to avoid SSR issues
+  if (!isServer) {
+    const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL || "http://localhost:3001";
+    const customerUrl = process.env.NEXT_PUBLIC_CUSTOMER_URL || "http://localhost:3002";
+
+    try {
+      config.plugins.push(
+        new NextFederationPlugin({
+          name: "shell",
+          filename: "static/chunks/remoteEntry.js",
+          remotes: {
+            admin: `admin@${adminUrl}/_next/static/chunks/remoteEntry.js`,
+            customer: `customer@${customerUrl}/_next/static/chunks/remoteEntry.js`,
+          },
+          // ... shared config
+        })
+      );
+    } catch (error) {
+      console.warn("Module Federation plugin error:", error.message);
+    }
+  }
+
+  return config;
+}
+```
+
+**Key Points:**
+- ✅ Only apply plugin when `!isServer` (client-side only)
+- ✅ Use `ssr: false` in dynamic imports: `dynamic(() => import('admin/AdminDashboard'), { ssr: false })`
+- ✅ Remote components will only load on the client, not during SSR
+- ✅ This prevents serverless function crashes on Vercel
+
+### Additional Checks
+
+1. **Verify Remote Apps are Deployed**: Make sure admin and customer dashboards are deployed before shell
+2. **Check Environment Variables**: Ensure `NEXT_PUBLIC_ADMIN_URL` and `NEXT_PUBLIC_CUSTOMER_URL` are set correctly in Vercel
+3. **Check CORS**: Remote apps need CORS headers (already configured in `next.config.js`)
+
+---
+
 ## Error: Cannot find module 'webpack/lib/runtime/StartupChunkDependenciesPlugin'
 
 This error occurs because `@module-federation/nextjs-mf` tries to access webpack internals that Next.js doesn't expose directly.
